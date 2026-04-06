@@ -1,0 +1,20 @@
+package seleniumBasic.selenium;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+public class LinkedIn {
+	public static void main(String[] args) {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://www.linkedin.com/login");
+		driver.findElement(By.cssSelector("#userName"));
+		WebElement search = driver.findElement(By.name("Email or Phone"));
+		search.sendKeys("8870505878", Keys.ENTER);
+		WebElement search1 = driver.findElement(By.name("Password"));
+		search1.sendKeys("1234", Keys.ENTER);
+		
+	}
+
+}
