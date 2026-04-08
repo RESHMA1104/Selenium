@@ -1,0 +1,27 @@
+package seleniumBasic.selenium;
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+public class KeyboardActions {
+	public static void main(String[] args) throws InterruptedException {
+		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.get("https://omayo.blogspot.com/");
+		Actions act = new Actions(driver);
+		WebElement compediumDevlink = driver.findElement(By.linkText("compendiumdev"));
+		act.keyDown(Keys.CONTROL).moveToElement(compediumDevlink).click().keyUp(Keys.CONTROL).build().perform();
+		String parentWindowhandle = driver.getWindowHandle();
+		Set<String> windowhandles = driver.getWindowHandles();
+		for(String handles : windowhandles) {
+			driver.switchTo().window(handles);
+		}
+		Thread.sleep(3000);
+		System.out.println("Child window is"+windowhandles);
+		driver.switchTo().window(parentWindowhandle);
+	}
+
+}
