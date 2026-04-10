@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-public class HerukoEx {
+public class Heruko2 {
 	public static void main(String[] args) {
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -17,9 +17,23 @@ public class HerukoEx {
 		password.sendKeys("Reshma@11");
 		WebElement submit = driver.findElement(By.id("submit"));
 		submit.click();
-		List<WebElement> data = driver.findElements(By.xpath("//tr[@class=\"contactTableBodyRow\"]//td"));
+		String Excepted = "Balu S";
+		List<WebElement> data = driver.findElements(By.xpath("//table[@id='myTable']//tr//td[2]"));
+		int contactCount = data.size();
+		System.out.println("Total Contact Count : "+contactCount);
 		for(WebElement webdata : data) {
 		System.out.println(webdata.getText());	
 		}
+		int i=1;
+		for(WebElement names : data) {
+			if(names.getText().equals(Excepted)) {
+				List<WebElement> actualrowdata = driver.findElements(By.xpath("//table[@id='myTable']/tr["+ i +"]"));
+				for(WebElement row : actualrowdata) {
+					System.out.println(row.getText());		
+				}
+			}
+			i++;
+		}
+		driver.quit();
 	}
 }
